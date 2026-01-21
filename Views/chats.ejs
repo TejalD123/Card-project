@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All chats</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h3>All chats</h3>
+    <form method="Get" action="/chats/new">
+        <button>New Chat</button><br/><br/>
+    </form>
+    <%for(let chat of chats){%>
+    <div class="chat">
+        <p>From: <%= chat.from %></p>
+        <div class="msg">
+        <p>Message: <%= chat.msg %></p>
+        <form method="get" action="/chats/<%=chat._id%>/edit">
+            <button>Edit</button>
+        </form>
+        <form method="POST" action="/chats/<%=chat._id%>?_method=DELETE">
+            <button id="delete" onclick="handleClick()" >Delete</button>
+        </form>
+        </div>
+        <p>Received: <%= chat.to %></p>
+        <hr>
+        <p><%=chat.created_at.toString().split(" ")[4]%></p>
+        <p><%=chat.created_at.toString().split(" ").slice(0, 4).join("-")%></p>
+    </div>
+    <br/>
+    <br/>
+<%}%>
+ 
+<script>
+  function handleClick() {
+    alert("do you want to delete ?");
+    
+  }
+</script>
+
+
+</body>
+</html>
+
